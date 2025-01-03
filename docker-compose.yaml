@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build:
+      context: ./api
+      dockerfile: dev/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+    networks:
+       - dev
+
+
+  backend-comands:
+    build:
+      context: ./api
+      dockerfile: dev/Dockerfile
+    volumes:
+      - ./api:/app
+    networks:
+      - dev
+    user: "1000:1000"
+
+
+  db-postgres:
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_USER: tzApp
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: tzApp
+    volumes:
+      - dbVolume:/var/lib/postgresql/data
+    networks:
+      - dev
+    ports:
+      - "5432:5432"
+
+
+  elastic:
+    image: elasticsearch:8.7.1
+    environment:
+      node.name: elasticsearch
+      discovery.type: single-node
+      xpack.ml.enabled: 'false'
+      xpack.security.enabled: 'false'
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - dev
+    command:
+      - bash
+      - -c
+      - |
+        elasticsearch-plugin install analysis-icu
+        elasticsearch
+
+
+networks:
+  dev:
+
+volumes:
+  uploads:
+  dbVolume:
+    driver: local
+  es-data:
+    driver: local

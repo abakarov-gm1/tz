@@ -12,6 +12,8 @@ services:
       - ./api:/app
     networks:
        - dev
+    depends_on:
+      - elastic
 
 
   backend-comands:
@@ -23,6 +25,7 @@ services:
     networks:
       - dev
     user: "1000:1000"
+
 
 
   db-postgres:

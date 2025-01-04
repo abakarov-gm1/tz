@@ -27,11 +27,11 @@ def delete_index():
         es.indices.delete(index=index_name)
 
 
-# поиск по всем полям
-response = es.search(index="first_index", query={"match_all": {}})
-print("Результаты поиска:")
-for hit in response["hits"]["hits"]:
-    print(f"ID: {hit['_id']}, Источник: {hit['_source']}")
+# # поиск по всем полям
+# response = es.search(index="first_index", query={"match_all": {}})
+# print("Результаты поиска:")
+# for hit in response["hits"]["hits"]:
+#     print(f"ID: {hit['_id']}, Источник: {hit['_source']}")
 
 
 def add_data_to_document():

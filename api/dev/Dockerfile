@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN alembic upgrade head
+
 
 EXPOSE 8000
 

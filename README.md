@@ -1,6 +1,8 @@
 1 Запуск проекта команда: make up (выполнить в той же директории что и файл Makefile)
+
 2 Запуск миграций make migrate
 Далее необходимо добавить данные в бд.
+
 
 регистрация нового пользователя: 
 postman: 
@@ -13,6 +15,7 @@ raw/json
     "role": "str"
 }
 
+
 Авторизаци - получение токена: 
 post -> http://localhost:8000/auth/login
 raw/json
@@ -20,6 +23,7 @@ raw/json
     "name":"str",
     "password":"str"
 }
+
 
 Добавление товара:
 post -> http://localhost:8000/create-product
@@ -30,6 +34,7 @@ raw/json
     "price":int,
     "quantity":int
 }
+
 
 поиск товара:
 get -> http://localhost:8000/search/products
